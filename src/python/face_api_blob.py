@@ -13,6 +13,7 @@ import json
 import requests
 import ast
 from ftplib import FTP
+
 #blob設定
 account_name = 'storageaccounttest91a3'
 account_key = 'QCxTMQ8IEprjrU4XCRzxodEWh7o8QiXc3CPULJJexS3sMbhtC0rK7XmtMJJeHSIFTSOb6mpmAgrYc53akPjMVA=='
@@ -29,7 +30,6 @@ font = cv2.FONT_HERSHEY_TRIPLEX
 KEY = '16e5282de5c44319bfd3823c684d848c'
 ENDPOINT = 'https://mthouse.cognitiveservices.azure.com/'
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
-
 
 #リクエスト設定
 request_url = 'https://mthouse.cognitiveservices.azure.com/face/v1.0/detect'
@@ -50,9 +50,8 @@ def getRectangle(faceDictionary):
     top = rect['top']
     right = left + rect['width']
     bottom = top + rect['height']
-    
-    return (left, top), (right, bottom) ,(left,bottom+25),(left,bottom+50)
 
+    return (left, top), (right, bottom) ,(left,bottom+25),(left,bottom+50)
 
 #blob upload
 def upload_blob(filename,container,pngflag=True):
@@ -62,13 +61,11 @@ def upload_blob(filename,container,pngflag=True):
     else:
         service.create_blob_from_path(container,filename, filename, content_settings=ContentSettings(content_type="application/json"))
 
-
 #映像キャプチャ
 cap = cv2.VideoCapture(web_camera)
 
 flag=True
 while(flag):
-
     _, frame = cap.read()
     cv2img = cv2.flip(frame, 1)
 
@@ -83,6 +80,7 @@ while(flag):
     sleep(INTERVAL)
 
 json_data = response.json()
+
 #画像情報付与
 for i in json_data:
     x,y,t1,t2= getRectangle(i)
@@ -113,7 +111,6 @@ upload_blob(file_name['cnt'],container_name2,pngflag=False)
 #     'ftp_user',
 #     passwd='0000'
 # )
-
 # with open(file_name['data'],'rb') as f:
 #     ftp.storlines('STOR /'+file_name['data'],f)
 # with open(file_name['img_1'],'rb') as f:
@@ -121,4 +118,3 @@ upload_blob(file_name['cnt'],container_name2,pngflag=False)
 # with open(file_name['img_2'],'rb') as f:
 #     ftp.storbinary('STOR /'+file_name['img_2'],f)
 # ftp.quit()
- 

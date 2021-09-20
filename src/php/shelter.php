@@ -3,16 +3,13 @@
 <link rel="stylesheet" href="design.css">
 
 <html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>避難所 状況</title>
+	</head>
 
-        <head>
-                <meta charset="UTF-8">
-                <title>
-                        避難所 状況
-                </title>
-        </head>
-
-        <body>
-                <h1><span>避難所 状況確認</span></h1>
+	<body>
+		<h1><span>避難所 状況確認</span></h1>
 
 		<h2><span>・</span>避難所 風景</h2>
 
